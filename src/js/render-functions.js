@@ -60,3 +60,11 @@ export function renderGallery(images) {
     lightbox.refresh();
   }
 }
+
+export function showLoadMoreButton() {
+  document.querySelector('.load-more').classList.remove('hidden');
+}
+
+export function hideLoadMoreButton() {
+  document.querySelector('.load-more').classList.add('hidden');
+}
