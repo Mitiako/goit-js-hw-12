@@ -58,7 +58,7 @@ async function onSearch(event) {
 
     renderGallery(data.hits);
 
-    if (data.hits.length < 15 || data.hits.length === totalHits) {
+    if (data.hits.length < 15 || totalHits <= 15) {
       hideLoadMoreButton();
     } else {
       showLoadMoreButton();
