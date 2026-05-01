@@ -30,7 +30,7 @@ export function createGalleryItem({
   downloads,
 }) {
   return `
-    <div class="gallery-item">
+    <li class="gallery-item">
       <a href="${largeImageURL}">
         <img src="${webformatURL}" alt="${tags}" />
       </a>
@@ -40,7 +40,7 @@ export function createGalleryItem({
         <p>Comments: ${comments}</p>
         <p>Downloads: ${downloads}</p>
       </div>
-    </div>
+    </li>
   `;
 }
 
