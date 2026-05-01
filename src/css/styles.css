@@ -115,3 +115,49 @@ body {
 .load-more:hover {
   background: #1e7e34;
 }
+
+
+/* ====== NEUMORPHISM LOADER ====== */
+.loader {
+  width: 70px;
+  height: 70px;
+  margin: 30px auto;
+  border-radius: 50%;
+  background: #f0f0f3;
+
+  /* Neumorphism shadows */
+  box-shadow:
+    8px 8px 16px #c5c5c5,
+    -8px -8px 16px #ffffff;
+
+  position: relative;
+  animation: pulseGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow:
+      8px 8px 16px #c5c5c5,
+      -8px -8px 16px #ffffff;
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow:
+      4px 4px 12px #c5c5c5,
+      -4px -4px 12px #ffffff;
+    transform: scale(1.08);
+  }
+
+  100% {
+    box-shadow:
+      8px 8px 16px #c5c5c5,
+      -8px -8px 16px #ffffff;
+    transform: scale(1);
+  }
+}
+
+/* Hide loader */
+.hidden {
+  display: none;
+}
