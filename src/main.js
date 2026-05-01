@@ -6,7 +6,6 @@ import {
   hideLoader,
   showLoadMoreButton,
   hideLoadMoreButton,
-  renderGallery,
 } from './js/render-functions';
 
 import iziToast from 'izitoast';
