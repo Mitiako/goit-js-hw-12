@@ -1,3 +1,7 @@
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+import './css/styles.css';
+
 import { getImagesByQuery } from './js/pixabay-api';
 import {
   renderGallery,
@@ -8,11 +12,7 @@ import {
   hideLoadMoreButton,
 } from './js/render-functions';
 
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-import './css/styles.css';
-
-const form = document.querySelector('.search-form');
+const form = document.querySelector('.form');
 const loadMoreBtn = document.querySelector('.load-more');
 
 let query = '';
@@ -58,8 +58,13 @@ async function onSearch(event) {
 
     renderGallery(data.hits);
 
+    // Кінець колекції на першій сторінці
     if (data.hits.length < 15 || totalHits <= 15) {
       hideLoadMoreButton();
+      iziToast.info({
+        message: "We're sorry, but you've reached the end of search results.",
+        position: 'topRight',
+      });
     } else {
       showLoadMoreButton();
     }
@@ -76,6 +81,8 @@ async function onSearch(event) {
 async function onLoadMore() {
   page += 1;
   showLoader();
+
+  loadMoreBtn.disabled = true;
 
   try {
     const data = await getImagesByQuery(query, page);
@@ -99,6 +106,8 @@ async function onLoadMore() {
     });
   } finally {
     hideLoader();
+
+    loadMoreBtn.disabled = false;
   }
 }
 
