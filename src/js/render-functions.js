@@ -44,3 +44,17 @@ export function showLoadMoreButton() {
 export function hideLoadMoreButton() {
   loadMoreBtn.classList.add('hidden');
 }
+
+return `
+  <div class="gallery-item">
+    <a href="${largeImageURL}">
+      <img src="${webformatURL}" alt="${tags}" />
+    </a>
+    <div class="gallery-info">
+      <p>Likes: ${likes}</p>
+      <p>Views: ${views}</p>
+      <p>Comments: ${comments}</p>
+      <p>Downloads: ${downloads}</p>
+    </div>
+  </div>
+`;
