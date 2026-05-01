@@ -1,60 +1,62 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const gallery = document.querySelector('.gallery');
-const loader = document.querySelector('.loader');
-const loadMoreBtn = document.querySelector('.load-more');
+let lightbox = null;
 
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
-
-export function createGallery(images) {
-  const markup = images
-    .map(
-      img => `
-      <a href="${img.largeImageURL}">
-        <img src="${img.webformatURL}" alt="${img.tags}" />
-      </a>
-    `
-    )
-    .join('');
-
-  gallery.insertAdjacentHTML('beforeend', markup);
-  lightbox.refresh();
-}
-
+// Очищення галереї
 export function clearGallery() {
+  const gallery = document.querySelector('.gallery');
   gallery.innerHTML = '';
 }
 
+// Показати loader
 export function showLoader() {
-  loader.classList.remove('hidden');
+  document.querySelector('.loader').classList.remove('hidden');
 }
 
+// Сховати loader
 export function hideLoader() {
-  loader.classList.add('hidden');
+  document.querySelector('.loader').classList.add('hidden');
 }
 
-export function showLoadMoreButton() {
-  loadMoreBtn.classList.remove('hidden');
-}
-
-export function hideLoadMoreButton() {
-  loadMoreBtn.classList.add('hidden');
-}
-
-return `
-  <div class="gallery-item">
-    <a href="${largeImageURL}">
-      <img src="${webformatURL}" alt="${tags}" />
-    </a>
-    <div class="gallery-info">
-      <p>Likes: ${likes}</p>
-      <p>Views: ${views}</p>
-      <p>Comments: ${comments}</p>
-      <p>Downloads: ${downloads}</p>
+// Створення HTML для однієї картки
+export function createGalleryItem({
+  webformatURL,
+  largeImageURL,
+  tags,
+  likes,
+  views,
+  comments,
+  downloads,
+}) {
+  return `
+    <div class="gallery-item">
+      <a href="${largeImageURL}">
+        <img src="${webformatURL}" alt="${tags}" />
+      </a>
+      <div class="gallery-info">
+        <p>Likes: ${likes}</p>
+        <p>Views: ${views}</p>
+        <p>Comments: ${comments}</p>
+        <p>Downloads: ${downloads}</p>
+      </div>
     </div>
-  </div>
-`;
+  `;
+}
+
+// Рендер масиву карток
+export function renderGallery(images) {
+  const gallery = document.querySelector('.gallery');
+  const markup = images.map(img => createGalleryItem(img)).join('');
+  gallery.insertAdjacentHTML('beforeend', markup);
+
+  // Ініціалізація або оновлення SimpleLightbox
+  if (!lightbox) {
+    lightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
+    });
+  } else {
+    lightbox.refresh();
+  }
+}
