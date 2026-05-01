@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="./src/css/styles.css" />
   </head>
   <body>
-    <form class="search-form">
-      <input type="text" name="query" placeholder="Search images..." />
+    <form class="search-form" id="search-form">
+      <div class="input-box">
+        <input type="text" name="query" required />
+        <label>Search images...</label>
+      </div>
       <button type="submit">Search</button>
     </form>
 
