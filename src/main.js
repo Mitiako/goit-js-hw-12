@@ -1,11 +1,12 @@
 import { getImagesByQuery } from './js/pixabay-api';
 import {
-  createGallery,
+  renderGallery,
   clearGallery,
   showLoader,
   hideLoader,
   showLoadMoreButton,
   hideLoadMoreButton,
+  renderGallery,
 } from './js/render-functions';
 
 import iziToast from 'izitoast';
@@ -55,7 +56,7 @@ async function onSearch(event) {
       return;
     }
 
-    createGallery(data.hits);
+    renderGallery(data.hits);
 
     if (data.hits.length < 15 || data.hits.length === totalHits) {
       hideLoadMoreButton();
@@ -78,7 +79,7 @@ async function onLoadMore() {
 
   try {
     const data = await getImagesByQuery(query, page);
-    createGallery(data.hits);
+    renderGallery(data.hits);
 
     smoothScroll();
 
